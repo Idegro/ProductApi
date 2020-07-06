@@ -10,18 +10,17 @@ using System.Threading.Tasks;
 
 namespace ProductApi.Models
 {
-    [Serializable()]
     public class Product : Base
     {
-        [JsonProperty("ProductId")]
+        [JsonPropertyName("ProductId")]
         public Guid Id { get; set; }
-
+        [JsonPropertyName("Price")]
         public decimal Price { get; set; }
-
+        [JsonPropertyName("Currency")]
         public string Currency { get; set; }
-
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
-
+        [JsonPropertyName("ProductGroupId")]
         public Guid ProductGroupId { get; set; }
     }
 }

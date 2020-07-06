@@ -63,13 +63,11 @@ namespace ProductApi.Controllers
 
 
         [HttpPut("{id}")]
-        public void UpdateProductById(string id)
+        public void UpdateProductById(string id, [FromBody] Product newProduct)
         {
             var productId = Guid.Parse(id);
 
-            Product newProd = new Product { Name = "testotesti" };
-
-            _productRepository.UpdateExistingProduct(productId, newProd);
+            _productRepository.UpdateExistingProduct(productId, newProduct);
         }
     }
 }

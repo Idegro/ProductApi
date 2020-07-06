@@ -17,16 +17,15 @@ namespace ProductApi.Data
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : Base
     {
-        protected readonly string _connection;
+
         private readonly ApplicationContext _context;
 
         private readonly DbSet<T> _set;
         protected virtual string TableName => typeof(T).Name;
         protected virtual string Identifier => "Id";
 
-        public BaseRepository(string connection, ApplicationContext context, DbSet<T> set)
+        public BaseRepository(ApplicationContext context, DbSet<T> set)
         {
-            _connection = connection;
             _context = context;
             _set = set;
             
@@ -43,8 +42,8 @@ namespace ProductApi.Data
 
         public IEnumerable<T> GetByName(string search)
         {
-            var products = _set.Where(o => o.Name.Contains(search)).ToArray();
-            return products;
+            var searchResult = _set.Where(o => o.Name.Contains(search)).ToArray();
+            return searchResult;
         }
         public void Update(Object o)
         {

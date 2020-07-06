@@ -13,7 +13,7 @@ namespace ProductApi.Data
     {
 
         private readonly ApplicationContext _context;
-        public ProductRepository(IOptions<ConnectionStrings> options, ApplicationContext context) : base(options.Value.ProductDB, context, context.Product)
+        public ProductRepository(ApplicationContext context) : base(context, context.Product)
         {
             _context = context;
         }
@@ -41,8 +41,8 @@ namespace ProductApi.Data
         public void UpdateExistingProduct(Guid id, Product newProd)
         {
             Product product = _context.Product.Where(p => p.Id == id).FirstOrDefault();
-            
-            product.Name = newProd.Name;
+
+            product = UpdateProductProperty(product, newProd);
 
             base.Update(product);
         }
@@ -51,6 +51,32 @@ namespace ProductApi.Data
         {
             Product product = _context.Product.Where(p => p.Id == id).FirstOrDefault();
             base.Delete(product);
+        }
+
+
+        private Product UpdateProductProperty(Product oldProd, Product newProd)
+        {
+            if (newProd.Name != null)
+            {
+                oldProd.Name = newProd.Name;
+            }
+
+            if (newProd.Currency != null)
+            {
+                oldProd.Currency = newProd.Currency;
+            }
+
+            if (newProd.Price != null)
+            {
+                oldProd.Price = newProd.Price;
+            }
+
+            if (newProd.ProductGroupId != null)
+            {
+                oldProd.ProductGroupId = newProd.ProductGroupId;
+            }
+
+            return oldProd;
         }
     }
 }
