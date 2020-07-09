@@ -1,19 +1,12 @@
-﻿using Dapper;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.CompilerServices;
+﻿using Microsoft.EntityFrameworkCore;
+using ProductApi.Data;
 using ProductApi.Models;
-using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
 
-namespace ProductApi.Data
+namespace ProductApi.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : Base
     {
@@ -45,24 +38,23 @@ namespace ProductApi.Data
             var searchResult = _set.Where(o => o.Name.Contains(search)).ToArray();
             return searchResult;
         }
-        public void Update(Object o)
+        public void Update(Object updateObject)
         {
+            _set.Attach((T)updateObject);
+            _context.Entry(updateObject).State = EntityState.Modified;
 
-            //_set.Where(p => p.Id == o.Id).FirstOrDefault();
-            _context.Update(o);
-            _context.SaveChanges();
+            _context.Update(updateObject);
 
         }
-        public void Delete(Object o)
+        public void Delete(Guid Id)
         {
-            _context.Remove(o);
-            _context.SaveChanges();
+            T toDelete = _set.Find(Id);
+            _context.Remove(toDelete);
         }
 
         public void Create(Object o)
         {
             _context.Add(o);
-            _context.SaveChanges();
         }
     }
 }

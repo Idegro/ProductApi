@@ -1,12 +1,14 @@
 ﻿using ProductApi.Data;
+using ProductApi.Models;
 
 namespace ProductApi.Repositories
 {
     public interface IUnitOfWork
     {
-        IProductRepository productRepository { get; }
+        IBaseRepository<Product> productRepository { get; }
 
-        void Commit();
-        void RollBack();
+        bool Commit();
+        bool RollBack();
+        void RemoveFromContext(object o);
     }
 }

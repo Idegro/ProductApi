@@ -1,11 +1,6 @@
 ﻿using Messages;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using NServiceBus;
-using ProductApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProductApi.Controllers

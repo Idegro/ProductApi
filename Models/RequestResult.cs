@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace ProductApi.Models
 {
-    public class ConnectionStrings
+    public class RequestResult : IRequestResult
     {
-        public string ProductDB { get; set; }
+        public bool Success { get; set; }
+        public string Message { get; set; }
     }
 }
