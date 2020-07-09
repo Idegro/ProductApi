@@ -1,7 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
-using ProductApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ProductApi.Repositories

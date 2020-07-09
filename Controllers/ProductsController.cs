@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using ProductApi.Data;
 using ProductApi.Models;
 using ProductApi.Repositories;
@@ -36,7 +33,6 @@ namespace ProductApi.Controllers
         [HttpGet("name:{searchstring}")]
         public IEnumerable<Product> GetProductBySearchString(string searchstring)
         {
-            //add filter string instead
             return _unitOfWork.productRepository.GetByName(searchstring);
         }
 
@@ -108,6 +104,7 @@ namespace ProductApi.Controllers
                 return _result;
             }
 
+            _result.Success = true;
             return _result;
         }
 
