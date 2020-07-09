@@ -47,6 +47,8 @@ namespace ProductApi.Data
         }
         public void Update(Object o)
         {
+
+            //_set.Where(p => p.Id == o.Id).FirstOrDefault();
             _context.Update(o);
             _context.SaveChanges();
 
